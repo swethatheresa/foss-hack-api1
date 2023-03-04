@@ -88,6 +88,8 @@ app.get("/getwishlist", async (req, res) => {
     if (jobapplication.length > 0) res.send(jobapplication);
     else res.send({ result: "error" });
 });
+//update status
+
 
 app.listen(5000);
 module.exports = app;
