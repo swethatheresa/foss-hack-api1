@@ -10,6 +10,49 @@ app.get('/', (request, response) => {
   response.json(
     {
       "message": "Basic API",
+      "routes": [
+        {
+          "route": "/create",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "route": "/getall",
+          "methods": [
+            "GET"
+           
+          ]
+        },
+        {
+          "route": "/getinterview",
+          "methods": [
+            "GET"
+           
+          ]
+        },
+        {
+          "route": "/getapplied",
+          "methods": [
+            "GET"
+           
+          ]
+        },
+        {
+          "route": "/getoffers",
+          "methods": [
+            "GET"
+           
+          ]
+        },
+        {
+          "route": "/getwishlist",
+          "methods": [
+            "GET"
+           
+          ]
+        }
+      ]
     }
   )
 })
