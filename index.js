@@ -1,7 +1,6 @@
 const express = require("express");
 require("./config");
 const JobApplication = require("./content");
-const Task = require("./content");
 const app = express();
 const cors = require("cors");
 app.use(express.json());
@@ -66,27 +65,6 @@ app.get('/', (request, response) => {
             "DELETE"
            
           ]
-        },
-        {
-          "route": "/createtask",
-          "methods": [
-            "POST"
-           
-          ]
-        },
-        {
-          "route": "/getalltasks",
-          "methods": [
-            "GET"
-           
-          ]
-        },
-        {
-          "route": "/gettask/:id",
-          "methods": [
-            "GET"
-           
-          ]
         }
       ]
     }
@@ -142,25 +120,5 @@ app.delete("/delete/:id",async(req,res)=> {
       res.status(500).json({ message: "Internal server error" }); // Send a generic error response
     }
   });
-
-//for tasks
-app.post("/createtask", async (req, res) => {
-  let newtask = new Task(req.body);
-  console.log(req.body);
-  let result = await newtask.save();
-  result = await result.toObject();
-  res.send(result);
-});
-app.get("/getalltasks", async (req, res) => {
-  let newtask = await Task.find();
-  if (newtask.length > 0) res.send(newtask);
-  else res.send({ result: "error" });
-});
-app.get("/gettask/:id",async(req,res)=>{
-  let jobapplication = await JobApplication.find( { jobid: req.params.id });
-  if (jobapplication.length > 0) res.send(jobapplication);
-  else res.send({ result: "error" });
-}
-);
 app.listen(5000);
 module.exports = app;

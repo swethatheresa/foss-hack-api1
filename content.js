@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-Schema=mongoose.Schema;
-
 const JobApplicationSchema = new mongoose.Schema({
     company: String,
     jobtitle: String,
@@ -14,19 +12,13 @@ const JobApplicationSchema = new mongoose.Schema({
     {
         type: String,
         default: "Wishlist",
+    },
+    task: 
+    {
+        type: String,
+        default :""
     }
 } 
 );
-
-const TaskSchema = new mongoose.Schema({
-    jobid: 
-    {   type: Schema.Types.ObjectId,
-        ref: "JobApplication"
-    },
-    taskdesc: String,
-} 
-);
-
 module.exports = mongoose.model('JobApplication', JobApplicationSchema);
-module.exports = mongoose.model('Task', TaskSchema);
 
