@@ -51,6 +51,20 @@ app.get('/', (request, response) => {
             "GET"
            
           ]
+        },
+        {
+          "route": "/update/:id",
+          "methods": [
+            "PUT"
+           
+          ]
+        },
+        {
+          "route": "/delete/:id",
+          "methods": [
+            "DELETE"
+           
+          ]
         }
       ]
     }
@@ -88,8 +102,23 @@ app.get("/getwishlist", async (req, res) => {
     if (jobapplication.length > 0) res.send(jobapplication);
     else res.send({ result: "error" });
 });
-//update status
-
-
+app.put("/update/:id", async (req, res) => {
+  try {
+    const jobapplication = await JobApplication.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Update the job record with the provided ID and the request body
+    res.status(200).json(jobapplication); // Send the updated job record as a response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" }); // Send a generic error response
+  }
+});
+app.delete("/delete/:id",async(req,res)=> {
+    try {
+      await JobApplication.findByIdAndDelete(req.params.id); // Delete the job record with the provided ID
+      res.status(204).send(); // Send a successful empty response with a status code of 204
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal server error" }); // Send a generic error response
+    }
+  });
 app.listen(5000);
 module.exports = app;
